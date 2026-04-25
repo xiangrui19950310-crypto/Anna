@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna 陳 - 資深宏觀經濟學家</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a365d',      // 深蓝色 - 主色调
+                        secondary: '#c2410c',    // 暖棕色 - 强调色
+                        neutral: '#f8fafc',      // 浅灰色 - 背景色
+                        dark: '#334155',         // 深灰色 - 文本色
+                        light: '#f1f5f9',        // 超浅灰色 - 分隔区域
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
+                        'hover': '0 10px 30px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+            .bg-glass {
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .section-padding {
+                padding-top: clamp(3rem, 8vh, 6rem);
+                padding-bottom: clamp(3rem, 8vh, 6rem);
+            }
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a365d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0f2a4a;
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 卡片悬停效果 */
+        .achievement-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 时间线样式 */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #1a365d;
+        }
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-neutral">
+    <!-- 导航栏 -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-glass border-b border-gray-200">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-serif font-bold text-primary">Anna 陳</a>
+            
+            <!-- 桌面导航 -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-dark hover:text-primary transition-all-300">關於我</a>
+                <a href="#education" class="text-dark hover:text-primary transition-all-300">教育背景</a>
+                <a href="#qualifications" class="text-dark hover:text-primary transition-all-300">專業資質</a>
+                <a href="#achievements" class="text-dark hover:text-primary transition-all-300">獲獎榮譽</a>
+                <a href="#research" class="text-dark hover:text-primary transition-all-300">研究領域</a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden text-primary focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </nav>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#about" class="text-dark hover:text-primary transition-all-300 py-2">關於我</a>
+                <a href="#education" class="text-dark hover:text-primary transition-all-300 py-2">教育背景</a>
+                <a href="#qualifications" class="text-dark hover:text-primary transition-all-300 py-2">專業資質</a>
+                <a href="#achievements" class="text-dark hover:text-primary transition-all-300 py-2">獲獎榮譽</a>
+                <a href="#research" class="text-dark hover:text-primary transition-all-300 py-2">研究領域</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section id="about" class="min-h-screen flex items-center pt-20 pb-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- 个人照片 -->
+                <div class="md:w-2/5 mb-10 md:mb-0" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+                        <div class="absolute inset-0 rounded-full bg-primary/10 transform rotate-6"></div>
+                        <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/d11952a134dd41e4b48282c9f213f560.jpg~tplv-a9rns2rl98-24:720:720.jpg?lk3s=8e244e95&rcl=20260424204952250E862478F5C1E519D0&rrcfp=8a172a1a&x-expires=1777639793&x-signature=sOymMHlPIvJxU48QxcYx%2B3gZWAI%3D" 
+                             alt="Anna 陳" 
+                             class="absolute inset-0 rounded-full object-cover border-4 border-white shadow-xl transform -rotate-3 hover:rotate-0 transition-all duration-500">
+                    </div>
+                </div>
+                
+                <!-- 个人简介 -->
+                <div class="md:w-3/5 md:pl-16" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-serif font-bold text-primary leading-tight mb-4">
+                        Anna 陳
+                    </h1>
+                    <p class="text-[clamp(1.2rem,3vw,1.8rem)] text-dark/80 mb-8">
+                        資深宏觀經濟學家 | 國際經濟政策研究學者
+                    </p>
+                    <div class="h-1 w-20 bg-secondary mb-8"></div>
+                    <p class="text-lg text-dark/80 mb-8 leading-relaxed">
+                        現年31歲，畢業於英國劍橋大學，長期深耕全球宏觀經濟走勢、國際貨幣體系、跨境金融格局與宏觀政策研判領域，具備國際化學術視野與紮實的經濟研究底蘊。
+                    </p>
+                    <p class="text-lg text-dark/80 mb-10 leading-relaxed">
+                        擅长全球經濟周期分析、区域经济发展规划、金融風險防控与宏觀趨勢前瞻研判，致力于为全球经济研究与政策研究領域贡献专业价值。
+                    </p>
+                    
+                    <!-- 联系按钮 -->
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="px-8 py-3 bg-primary text-white rounded-full hover:bg-primary/90 transition-all-300 shadow-md hover:shadow-lg">
+                            <i class="fa fa-envelope mr-2"></i> 學術活動
+                        </a>
+                        <a href="#achievements" class="px-8 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-all-300">
+                            <i class="fa fa-trophy mr-2"></i> 獲獎榮譽
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育背景 -->
+    <section id="education" class="section-padding bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-serif font-bold text-primary mb-4">教育背景</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto mb-6"></div>
+                <p class="text-lg text-dark/70 max-w-3xl mx-auto">
+                    劍橋大學一級榮譽畢業生，擁有紮實的經濟學理論基礎和國際化的學術視野
+                </p>
+            </div>
+            
+            <div class="timeline relative max-w-4xl mx-auto">
+                <!-- 教育经历 -->
+                <div class="mb-16 relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex flex-col md:flex-row items-start">
+                        <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right">
+                            <h3 class="text-xl font-serif font-bold text-primary mb-2">剑桥大学</h3>
+                            <p class="text-secondary font-semibold mb-2">經濟學博士</p>
+                            <p class="text-dark/70 mb-4">2018 - 2022</p>
+                            <p class="text-dark/80">
+                                專注於宏觀經濟學與國際金融研究，獲得一級榮譽學位，論文《全球貨幣體系變革與新興市場金融穩定性》評為年度最佳博士論文。
+                            </p>
+                        </div>
+                        <div class="absolute left-50% top-0 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-white shadow-md"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <div class="bg-white p-6 rounded-lg shadow-soft">
+                                <p class="text-dark/80 italic">
+                                    "Anna的研究展現了對全球經濟格局的深刻理解和卓越的分析能力，是我見過最有前途的年輕經濟學家之一。"
+                                </p>
+                                <p class="text-dark/60 mt-4">— Professor Robert Johnson, 劍橋大學經濟學院院長</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-16 relative" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex flex-col md:flex-row items-start">
+                        <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right order-1 md:order-none">
+                            <div class="bg-white p-6 rounded-lg shadow-soft">
+                                <p class="text-dark/80 italic">
+                                    "在她的碩士論文中展現出的分析深度和創新思維令人印象深刻，預示著她未來在經濟學領域的卓越成就。"
+                                </p>
+                                <p class="text-dark/60 mt-4">— Dr. Elizabeth Warren, 牛津大學經濟學教授</p>
+                            </div>
+                        </div>
+                        <div class="absolute left-50% top-0 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-white shadow-md"></div>
+                        <div class="md:w-1/2 md:pl-12 order-none md:order-1">
+                            <h3 class="text-xl font-serif font-bold text-primary mb-2">牛津大学</h3>
+                            <p class="text-secondary font-semibold mb-2">經濟學碩士</p>
+                            <p class="text-dark/70 mb-4">2016 - 2018</p>
+                            <p class="text-dark/80">
+                                國際經濟學專業，研究方向為跨境資本流動與金融風險，獲得優秀畢業生稱號，碩士論文評為年度最佳研究成果。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex flex-col md:flex-row items-start">
+                        <div class="md:w-1/2 md:pr-12 mb-6 md:mb-0 md:text-right">
+                            <h3 class="text-xl font-serif font-bold text-primary mb-2">北京大学</h3>
+                            <p class="text-secondary font-semibold mb-2">經濟學學士</p>
+                            <p class="text-dark/70 mb-4">2012 - 2016</p>
+                            <p class="text-dark/80">
+                                金融學專業，輔修國際關係，連續四年獲得校級獎學金，畢業時獲得"優秀畢業生"稱號，GPA排名專業前3%。
+                            </p>
+                        </div>
+                        <div class="absolute left-50% top-0 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary border-4 border-white shadow-md"></div>
+                        <div class="md:w-1/2 md:pl-12">
+                            <div class="bg-white p-6 rounded-lg shadow-soft">
+                                <p class="text-dark/80 italic">
+                                    "Anna在本科階段就展現出了非凡的學術潛力和研究熱情，她的畢業論文《中國金融市場開放與國際資本流動》獲得了校級優秀論文獎。"
+                                </p>
+                                <p class="text-dark/60 mt-4">— Professor Zhang Wei, 北京大學經濟學院</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 專業資質 -->
+    <section id="qualifications" class="section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-serif font-bold text-primary mb-4">專業資質</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto mb-6"></div>
+                <p class="text-lg text-dark/70 max-w-3xl mx-auto">
+                    擁有多項國際權威專業資格證書，展現出在金融分析、風險管理和經濟政策領域的專業能力
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 资质卡片 1 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 hover:shadow-hover transition-all-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-line-chart text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-primary mb-3">CFA 特許金融分析師</h3>
+                    <p class="text-dark/70 mb-4">2020年獲得</p>
+                    <p class="text-dark/80">
+                        全球投資業裡最為嚴格與含金量最高的資格認證之一，證明了在投資分析和portfolio management方面的專業能力。
+                    </p>
+                </div>
+                
+                <!-- 资质卡片 2 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 hover:shadow-hover transition-all-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-shield text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-primary mb-3">FRM 金融風險管理師</h3>
+                    <p class="text-dark/70 mb-4">2021年獲得</p>
+                    <p class="text-dark/80">
+                        由全球風險管理專業人士協會認證，證明了在金融風險管理領域的專業知識和技能。
+                    </p>
+                </div>
+                
+                <!-- 资质卡片 3 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 hover:shadow-hover transition-all-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-bar-chart text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-primary mb-3">高級註冊宏觀經濟分析師</h3>
+                    <p class="text-dark/70 mb-4">2022年獲得</p>
+                    <p class="text-dark/80">
+                        由中國國家統計局認證的高級經濟分析專業資格，證明了在宏觀經濟分析和預測方面的專業能力。
+                    </p>
+                </div>
+                
+                <!-- 资质卡片 4 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 hover:shadow-hover transition-all-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-globe text-2xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold text-primary mb-3">國際經濟政策高級分析師</h3>
+                    <p class="text-dark/70 mb-4">2023年獲得</p>
+                    <p class="text-dark/80">
+                        由國際經濟政策研究所認證，證明了在國際經濟政策分析和評估方面的專業知識和技能。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 獲獎榮譽 -->
+    <section id="achievements" class="section-padding bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-serif font-bold text-primary mb-4">獲獎榮譽</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto mb-6"></div>
+                <p class="text-lg text-dark/70 max-w-3xl mx-auto">
+                    多次获得国际学术奖项和荣誉，彰显了在经济学研究領域的卓越成就和影响力
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 获奖卡片 1 -->
+                <div class="achievement-card bg-white rounded-xl shadow-soft overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-2 bg-secondary"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-xl font-serif font-bold text-primary">劍橋大學經濟學院年度傑出學者獎</h3>
+                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">2022</span>
+                        </div>
+                        <p class="text-dark/80 mb-6">
+                            授予在经济学研究領域表现卓越的学者，表彰其在宏观经济学理论与实践方面的创新贡献。
+                        </p>
+                        <div class="flex items-center text-dark/60">
+                            <i class="fa fa-trophy text-secondary mr-2"></i>
+                            <span>剑桥大学经济学院</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 获奖卡片 2 -->
+                <div class="achievement-card bg-white rounded-xl shadow-soft overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-2 bg-secondary"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-xl font-serif font-bold text-primary">英國皇家經濟學會研究成就榮譽勳章</h3>
+                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">2021</span>
+                        </div>
+                        <p class="text-dark/80 mb-6">
+                            英国皇家经济学会授予在经济学研究領域有突出贡献的学者，表彰其在国际金融市场稳定性研究方面的创新成果。
+                        </p>
+                        <div class="flex items-center text-dark/60">
+                            <i class="fa fa-trophy text-secondary mr-2"></i>
+                            <span>英国皇家经济学会</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 获奖卡片 3 -->
+                <div class="achievement-card bg-white rounded-xl shadow-soft overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-2 bg-secondary"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-xl font-serif font-bold text-primary">歐洲宏觀經濟研究學會青年經濟領袖獎</h3>
+                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">2020</span>
+                        </div>
+                        <p class="text-dark/80 mb-6">
+                            授予在宏觀經濟學領域有傑出表現的青年學者，表彰其在歐洲經濟一體化與金融市場發展研究方面的貢獻。
+                        </p>
+                        <div class="flex items-center text-dark/60">
+                            <i class="fa fa-trophy text-secondary mr-2"></i>
+                            <span>欧洲宏观经济研究学会</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 获奖卡片 4 -->
+                <div class="achievement-card bg-white rounded-xl shadow-soft overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+                    <div class="h-2 bg-secondary"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-xl font-serif font-bold text-primary">全球經濟論壇傑出研究貢獻獎</h3>
+                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">2019</span>
+                        </div>
+                        <p class="text-dark/80 mb-6">
+                            全球经济论坛授予在全球经济研究領域有突出贡献的学者，表彰其在新興市場金融风险研究方面的创新成果。
+                        </p>
+                        <div class="flex items-center text-dark/60">
+                            <i class="fa fa-trophy text-secondary mr-2"></i>
+                            <span>全球经济论坛</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 获奖卡片 5 -->
+                <div class="achievement-card bg-white rounded-xl shadow-soft overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+                    <div class="h-2 bg-secondary"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-xl font-serif font-bold text-primary">國際貨幣基金組織青年學者獎學金</h3>
+                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">2018</span>
+                        </div>
+                        <p class="text-dark/80 mb-6">
+                            國際貨幣基金組織授予在國際金融領域有潛力的青年學者，支持其在國際貨幣體系改革研究方面的工作。
+                        </p>
+                        <div class="flex items-center text-dark/60">
+                            <i class="fa fa-trophy text-secondary mr-2"></i>
+                            <span>国际货币基金组织</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 获奖卡片 6 -->
+                <div class="achievement-card bg-white rounded-xl shadow-soft overflow-hidden" data-aos="fade-up" data-aos-delay="600">
+                    <div class="h-2 bg-secondary"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-xl font-serif font-bold text-primary">牛津大學優秀研究生獎</h3>
+                            <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">2017</span>
+                        </div>
+                        <p class="text-dark/80 mb-6">
+                            牛津大學授予在研究生階段表現卓越的學生，表彰其在國際經濟學研究方面的傑出成就。
+                        </p>
+                        <div class="flex items-center text-dark/60">
+                            <i class="fa fa-trophy text-secondary mr-2"></i>
+                            <span>牛津大学</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 研究領域 -->
+    <section id="research" class="section-padding">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-serif font-bold text-primary mb-4">研究領域</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto mb-6"></div>
+                <p class="text-lg text-dark/70 max-w-3xl mx-auto">
+                    長期深耕全球宏觀經濟走勢、國際貨幣體系、跨境金融格局與宏觀政策研判領域
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+                <!-- 研究領域介绍 -->
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-serif font-bold text-primary mb-6">全球經濟周期分析</h3>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        研究全球主要經濟體的經濟周期波動規律及其相互影響機制，分析經濟周期對金融市場、貿易格局和投資策略的影響。通過構建宏觀經濟模型，預測全球經濟走勢，為政策制定者和投資者提供決策參考。
+                    </p>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        近期研究重點包括：後疫情時代全球經濟復甦路徑研究、主要經濟體貨幣政策轉向對全球經濟的影響、新興市場與發達經濟體經濟周期同步性分析。
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">經濟周期理論</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">宏觀經濟模型</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">經濟預測</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">全球經濟治理</span>
+                    </div>
+                </div>
+                
+                <!-- 研究图表 -->
+                <div class="bg-white rounded-xl shadow-soft p-6" data-aos="fade-left">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <canvas id="economicCycleChart" width="600" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+                <!-- 研究图表 -->
+                <div class="order-2 md:order-1 bg-white rounded-xl shadow-soft p-6" data-aos="fade-right">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <canvas id="financialRiskChart" width="600" height="400"></canvas>
+                    </div>
+                </div>
+                
+                <!-- 研究領域介绍 -->
+                <div class="order-1 md:order-2" data-aos="fade-left">
+                    <h3 class="text-2xl font-serif font-bold text-primary mb-6">金融風險防控</h3>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        研究金融市場風險形成机制、传导路径和防控策略，分析系统性金融风险的识别、度量和预警方法。结合宏觀審慎政策框架，提出金融風險防控的政策建议，维护金融体系稳定。
+                    </p>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        近期研究重點包括：跨境資本流動對新興市場金融穩定性的影響、數字金融發展與金融風險演變、全球金融監管協調與合作機制。
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">金融風險管理</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">系統性風險</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">宏觀審慎政策</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">金融監管</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- 研究領域介绍 -->
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-serif font-bold text-primary mb-6">宏觀趨勢前瞻研判</h3>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        運用前瞻性思維和創新方法，分析全球經濟、金融和政策領域的長期趨勢和結構性變化。結合定性與定量分析，預測未來經濟發展方向，為企業戰略規劃和政策制定提供參考。
+                    </p>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        近期研究重點包括：全球經濟格局重構與地緣經濟變化、數字化轉型對宏觀經濟的影響、氣候變化與綠色金融發展趨勢、人口結構變化對長期經濟增長的影響。
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">趨勢預測</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">結構轉型</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">創新經濟</span>
+                        <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm">可持續發展</span>
+                    </div>
+                </div>
+                
+                <!-- 研究图表 -->
+                <div class="bg-white rounded-xl shadow-soft p-6" data-aos="fade-left">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <canvas id="trendAnalysisChart" width="600" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社會兼職 -->
+    <section id="affiliations" class="section-padding bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-serif font-bold text-primary mb-4">社會兼職</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto mb-6"></div>
+                <p class="text-lg text-dark/70 max-w-3xl mx-auto">
+                    擔任多個國際學術機構和研究組織的重要職務，積極參與全球經濟研究與政策討論
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 兼职卡片 1 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 flex items-start" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                        <i class="fa fa-university text-2xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-serif font-bold text-primary mb-2">歐洲經濟研究院特聘研究員</h3>
+                        <p class="text-dark/70 mb-4">2022年至今</p>
+                        <p class="text-dark/80">
+                            參與歐洲經濟政策研究項目，負責宏觀經濟分析和政策評估，為歐洲經濟一體化和金融市場發展提供研究支持。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 兼职卡片 2 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 flex items-start" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                        <i class="fa fa-flask text-2xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-serif font-bold text-primary mb-2">劍橋經濟政策實驗室資深研究員</h3>
+                        <p class="text-dark/70 mb-4">2021年至今</p>
+                        <p class="text-dark/80">
+                            參與宏觀經濟政策實驗研究，設計和實施經濟政策模擬實驗，評估不同政策方案的效果和影響。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 兼职卡片 3 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 flex items-start" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                        <i class="fa fa-globe text-2xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-serif font-bold text-primary mb-2">全球經濟論壇青年專家委員會成員</h3>
+                        <p class="text-dark/70 mb-4">2020年至今</p>
+                        <p class="text-dark/80">
+                            参与全球经济论坛青年专家委员会工作，就全球經濟治理、金融市场稳定和可持續發展等议题提供专业建议。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 兼职卡片 4 -->
+                <div class="bg-white rounded-xl shadow-soft p-8 flex items-start" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                        <i class="fa fa-book text-2xl text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-serif font-bold text-primary mb-2">《國際經濟學評論》編委</h3>
+                        <p class="text-dark/70 mb-4">2019年至今</p>
+                        <p class="text-dark/80">
+                            担任《國際經濟學評論》編委，负责稿件评审和期刊发展规划，推动国际经济学研究的交流与创新。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系部分 -->
+    <section id="contact" class="section-padding bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-serif font-bold mb-4">學術活動</h2>
+                <div class="h-1 w-20 bg-secondary mx-auto mb-6"></div>
+                <p class="text-lg text-white/80 max-w-3xl mx-auto">
+                    如果您对我的研究感兴趣，或者有合作意向，欢迎随时學術活動
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- 學術活動 -->
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-serif font-bold mb-6">联系方式</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">國際學術會議</h4>
+                                <p class="text-white/80">2025年全球經濟論壇年會特邀演講嘉賓，發表《後疫情時代的全球經濟格局重構》主題演講</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">研究項目</h4>
+                                <p class="text-white/80">主持歐盟資助項目《數字化轉型對歐洲金融市場穩定性的影響》，研究經費200萬歐元</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-map-marker text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">學術出版</h4>
+                                <p class="text-white/80">在《國際經濟學雜誌》、《金融經濟學期刊》等頂級期刊發表學術論文30餘篇，引用次數超過2000次</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fa fa-globe text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">政策諮詢</h4>
+                                <p class="text-white/80">為多國中央銀行和財政部提供宏觀經濟政策諮詢，參與國際貨幣基金組織政策評估工作</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 學術影響力 -->
+                    <div class="mt-10">
+                        <h3 class="text-2xl font-serif font-bold mb-6">學術影響力</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all-300">
+                                <i class="fa fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all-300">
+                                <i class="fa fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all-300">
+                                <i class="fa fa-facebook text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-all-300">
+                                <i class="fa fa-researchgate text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 联系表单 -->
+                <div data-aos="fade-left">
+                    <h3 class="text-2xl font-serif font-bold mb-6">入選湯森路透全球高被引科學家名錄，連續三年被評為「全球前1%經濟學研究者」</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block mb-2 font-medium">學術合作</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-white" placeholder="您的學術合作">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block mb-2 font-medium">國際學術會議</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-white" placeholder="您的國際學術會議">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block mb-2 font-medium">學術服務</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-white" placeholder="學術成果學術服務">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block mb-2 font-medium">學術成果</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-white" placeholder="请输入您的學術成果"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full px-6 py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-all-300 shadow-md hover:shadow-lg">
+                            <i class="fa fa-paper-plane mr-2"></i> 入選湯森路透全球高被引科學家名錄，連續三年被評為「全球前1%經濟學研究者」
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white/80 py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">Anna 陳</h3>
+                    <p>資深宏觀經濟學家 | 國際經濟政策研究學者</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#about" class="hover:text-secondary transition-all-300">關於我</a>
+                    <a href="#education" class="hover:text-secondary transition-all-300">教育背景</a>
+                    <a href="#qualifications" class="hover:text-secondary transition-all-300">專業資質</a>
+                    <a href="#achievements" class="hover:text-secondary transition-all-300">獲獎榮譽</a>
+                    <a href="#research" class="hover:text-secondary transition-all-300">研究領域</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2026 Anna 陳. 保留所有权利.</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="text-white/60 hover:text-secondary transition-all-300 mx-2">隱私政策</a>
+                    <a href="#" class="text-white/60 hover:text-secondary transition-all-300 mx-2">使用條款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 初始化AOS动画库
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // 移动端菜单切换
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 关闭移动端菜单（点击菜单项后）
+            const mobileMenuItems = mobileMenu.querySelectorAll('a');
+            mobileMenuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // 联系表单提交
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 获取表单数据
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // 表单验证
+                if (!name || !email || !subject || !message) {
+                    alert('表单已提交');
+                    return;
+                }
+                
+                // 模拟表单提交
+                alert('表单已提交');
+                contactForm.reset();
+            });
+            
+            // 初始化图表
+            initCharts();
+        });
+        
+        // 图表初始化
+        function initCharts() {
+            // 检查Chart.js是否加载
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js not loaded');
+                return;
+            }
+            
+            // 经济周期图表
+            const economicCycleCtx = document.getElementById('economicCycleChart');
+            if (economicCycleCtx) {
+                new Chart(economicCycleCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+                        datasets: [
+                            {
+                                label: '全球GDP增長率',
+                                data: [3.6, 3.5, -3.1, 5.9, 3.0, 3.5, 3.2, 3.8, 4.0],
+                                borderColor: '#1a365d',
+                                backgroundColor: 'rgba(26, 54, 93, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            },
+                            {
+                                label: '新興市場增長率',
+                                data: [4.7, 4.5, -2.0, 6.7, 4.0, 4.8, 4.5, 5.0, 5.2],
+                                borderColor: '#c2410c',
+                                backgroundColor: 'rgba(194, 65, 12, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '全球經濟周期波動趨勢',
+                                font: {
+                                    size: 16,
+                                    family: 'Inter, sans-serif',
+                                    weight: 'bold'
+                                }
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'GDP增長率 (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 金融风险图表
+            const financialRiskCtx = document.getElementById('financialRiskChart');
+            if (financialRiskCtx) {
+                new Chart(financialRiskCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['市場風險', '信用风险', '流動性風險', '操作風險', '系統性風險', '政策風險'],
+                        datasets: [
+                            {
+                                label: '發達經濟體',
+                                data: [65, 45, 55, 40, 50, 60],
+                                backgroundColor: 'rgba(26, 54, 93, 0.2)',
+                                borderColor: '#1a365d',
+                                pointBackgroundColor: '#1a365d',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: '#1a365d'
+                            },
+                            {
+                                label: '新興市場',
+                                data: [75, 65, 70, 50, 65, 80],
+                                backgroundColor: 'rgba(194, 65, 12, 0.2)',
+                                borderColor: '#c2410c',
+                                pointBackgroundColor: '#c2410c',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: '#c2410c'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '金融風險指標對比分析',
+                                font: {
+                                    size: 16,
+                                    family: 'Inter, sans-serif',
+                                    weight: 'bold'
+                                }
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: true
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // 趋势分析图表
+            const trendAnalysisCtx = document.getElementById('trendAnalysisChart');
+            if (trendAnalysisCtx) {
+                new Chart(trendAnalysisCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['數字化轉型', '綠色經濟', '人口結構變化', '全球化重構', '地緣政治風險', '技術創新'],
+                        datasets: [
+                            {
+                                label: '對經濟增長影響',
+                                data: [85, 70, 60, 75, 55, 90],
+                                backgroundColor: [
+                                    'rgba(26, 54, 93, 0.7)',
+                                    'rgba(26, 54, 93, 0.6)',
+                                    'rgba(26, 54, 93, 0.5)',
+                                    'rgba(26, 54, 93, 0.8)',
+                                    'rgba(26, 54, 93, 0.4)',
+                                    'rgba(26, 54, 93, 0.9)'
+                                ],
+                                borderColor: [
+                                    'rgba(26, 54, 93, 1)',
+                                    'rgba(26, 54, 93, 1)',
+                                    'rgba(26, 54, 93, 1)',
+                                    'rgba(26, 54, 93, 1)',
+                                    'rgba(26, 54, 93, 1)',
+                                    'rgba(26, 54, 93, 1)'
+                                ],
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: '長期結構性趨勢影響評估',
+                                font: {
+                                    size: 16,
+                                    family: 'Inter, sans-serif',
+                                    weight: 'bold'
+                                }
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: '影響程度 (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
